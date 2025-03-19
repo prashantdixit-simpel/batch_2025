@@ -17,4 +17,14 @@ class Customer extends Model
         'email_id',
         'phone_number'
     ];
+
+    public function existing_Connection()
+    {
+        return $this->hasOne(ConnectionRequest::class,'user_id','id')->where('type','customers');
+    }
+
+    public function existing_connections()
+    {
+        return $this->hasMany(ConnectionRequest::class,'user_id','id')->where('type','customers');
+    }
 }

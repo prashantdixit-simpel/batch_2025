@@ -13,8 +13,11 @@ class CustomerController extends Controller
     public function customer_list()
     {
         // $list = Customer::get();
+        $list = Customer::with(['existing_Connection','existing_connections'])->withTrashed()->get();
         // $list = Customer::withTrashed()->get();
-        $list = Customer::onlyTrashed()->get();
+
+        // dd($list[4]->existing_connection,$list[4]->existing_connections[0]);
+        // $list = Customer::onlyTrashed()->get();
 
         $response_date=[
             'status'=>'success',
