@@ -90,7 +90,8 @@ class CustomerController extends Controller
         $valid = $this->validateAuth($request->connection_id,$request->auth_code);
         if($valid)
         {
-            $customer = Customer::find($valid->user_id);
+            $customer = Customer::with('payment_methods')->find($valid->user_id);
+            // dd($valid->customer_detail);
 
             return response()->json(['status'=>'success','message'=>'Profile Details','data'=>$customer]);
         }
