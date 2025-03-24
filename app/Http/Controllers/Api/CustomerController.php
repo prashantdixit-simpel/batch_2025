@@ -7,8 +7,13 @@ use App\Models\ConnectionRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
+use App\Http\Traits\AuthenticationTrait;
+
+
+
 class CustomerController extends Controller
 {
+    use AuthenticationTrait;
     //
     public function customer_list()
     {
@@ -74,13 +79,13 @@ class CustomerController extends Controller
     }
 
 
-    private function validateAuth($connection_id,$auth_code)
-    {
-        $valid = ConnectionRequest::where(['connection_id'=>$connection_id,'auth_code'=>$auth_code])->first();
+    // private function validateAuth($connection_id,$auth_code)
+    // {
+    //     $valid = ConnectionRequest::where(['connection_id'=>$connection_id,'auth_code'=>$auth_code])->first();
 
-        return $valid;
+    //     return $valid;
 
-    }
+    // }
 
 
 

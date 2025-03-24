@@ -11,8 +11,11 @@ use App\Models\Customer;
 use App\Models\ConnectionRequest;
 use App\Models\Otp;
 
+use App\Http\Traits\AuthenticationTrait;
+
 class AuthController extends Controller
 {
+    use AuthenticationTrait;
     //
     public function get_connection_id(Request $request)
     {
@@ -152,13 +155,13 @@ class AuthController extends Controller
     }
 
 
-    private function validateConnection($request)
-    {
-        $valid = ConnectionRequest::where('connection_id',$request->connection_id)->first();
+    // private function validateConnection($request)
+    // {
+    //     $valid = ConnectionRequest::where('connection_id',$request->connection_id)->first();
 
-        return $valid;
+    //     return $valid;
 
-    }
+    // }
 
     private function genrate_otp($phone)
     {
