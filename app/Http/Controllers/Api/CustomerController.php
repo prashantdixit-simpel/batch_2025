@@ -103,4 +103,29 @@ class CustomerController extends Controller
         else
             return response()->json(['status'=>'error','message'=>'Invalid Connection','data'=>[]]);
     }
+
+
+    public function customer_listing(Request $request)
+    {
+        $valid = $this->validateAuth($request->connection_id,$request->auth_code);
+        if($valid)
+        {
+            $sdate="2025-03-01";
+            $customer = Customer::whereHas('customer_orders',function($query) use ($sdate){
+                                        $query->where('payment_status',1)
+                                            ->where('customer_orders.created_at','>',$sdate);
+                                    })
+                                    ->get();
+
+            // $customer = Customer::join('customer_orders','customer_orders.customer_id','customers.id')
+            //                     ->where('payment_status',1)
+            //                     ->select('customers.*')
+            //                     ->groupBy('customers.id')
+            //                     ->get();
+
+            return response()->json(['status'=>'success','message'=>'Customer List','data'=>$customer]);
+        }
+        else
+            return response()->json(['status'=>'error','message'=>'Invalid Connection','data'=>[]]);
+    }
 }

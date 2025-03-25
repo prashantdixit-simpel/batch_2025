@@ -39,4 +39,9 @@ class Customer extends Model
     // {
     //     return $this->belongsToMany(PaymentMethod::class,'pivot table','pivot_colunm for current modal','pivot_colunm for reltion modal','cureent modal join column','raletion bodal join columns');
     // }
+
+    public function customer_orders()
+    {
+        return $this->hasMany(CustomerOrder::class);
+    }
 }

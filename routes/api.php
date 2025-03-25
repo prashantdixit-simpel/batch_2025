@@ -59,3 +59,7 @@ Route::post('/request_otp',[AuthController::class,'request_otp']);
 Route::post('login',[AuthController::class,'login']);
 Route::post('register_customer',[AuthController::class,'register_customer']);
 Route::post('profile_details',[CustomerController::class,'profile_details']);
+
+
+// list of customers for pending payment_status
+Route::post('/customer_listing',[CustomerController::class,'customer_listing']);
